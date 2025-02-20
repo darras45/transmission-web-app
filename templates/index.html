@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transmission Line Calculator</title>
+</head>
+<body>
+    <h2>Transmission Line Parameter Calculator</h2>
+    <form method="post">
+        <label>Distance D12 (m):</label>
+        <input type="text" name="D12" required><br>
+
+        <label>Distance D23 (m):</label>
+        <input type="text" name="D23" required><br>
+
+        <label>Distance D31 (m):</label>
+        <input type="text" name="D31" required><br>
+
+        <label>Conductor GMR (D_S) in meters:</label>
+        <input type="text" name="DS" required><br>
+
+        <label>Conductor Radius (r) in meters:</label>
+        <input type="text" name="r" required><br>
+
+        <label>Bundle Spacing (d) in meters:</label>
+        <input type="text" name="d" required><br>
+
+        <label>Transmission Line Length (km):</label>
+        <input type="text" name="length" required><br>
+
+        <button type="submit">Calculate</button>
+    </form>
+
+    {% if Deq %}
+        <h3>Results:</h3>
+        <p>Equivalent Phase Spacing (D_eq): {{ Deq|round(3) }} m</p>
+        <p>Inductance (L): {{ L|round(6) }} H per {{ request.form['length'] }} km</p>
+        <p>Capacitance (C): {{ C|round(6) }} F per {{ request.form['length'] }} km</p>
+    {% endif %}
+
+    {% if error %}
+        <p style="color:red;">{{ error }}</p>
+    {% endif %}
+</body>
+</html>
